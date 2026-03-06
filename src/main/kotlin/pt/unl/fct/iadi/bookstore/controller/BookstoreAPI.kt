@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RequestParam
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateReviewRequest
+import pt.unl.fct.iadi.bookstore.controller.dto.FindAllBooksResponse
+import pt.unl.fct.iadi.bookstore.controller.dto.FindBookResponse
+import pt.unl.fct.iadi.bookstore.controller.dto.FindBooksReviewsResponse
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceReviewRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateReviewRequest
-import pt.unl.fct.iadi.bookstore.domain.Book
-import pt.unl.fct.iadi.bookstore.domain.Review
 
 @Tag(name = "Bookstore API", description = "the bookstore API")
 interface BookstoreAPI {
@@ -43,7 +43,7 @@ interface BookstoreAPI {
         produces = ["application/json"],
         method = [RequestMethod.GET]
     )
-    fun findAllBooks() : ResponseEntity<List<Book>>
+    fun findAllBooks() : ResponseEntity<FindAllBooksResponse>
 
 
     @Operation(
@@ -114,7 +114,7 @@ interface BookstoreAPI {
             description = "ISBN of the book to be searched",
             required = true,
         ) @Valid @PathVariable("isbn") isbn: String
-    ) : ResponseEntity<Book>
+    ) : ResponseEntity<FindBookResponse>
 
 
     @Operation(
@@ -249,7 +249,7 @@ interface BookstoreAPI {
             description = "ISBN of the book to be found",
             required = true,
         ) @Valid @PathVariable("isbn") isbn: String
-    ): ResponseEntity<List<Review>>
+    ): ResponseEntity<FindBooksReviewsResponse>
 
 
     @Operation(
