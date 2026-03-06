@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateReviewRequest
-import pt.unl.fct.iadi.bookstore.controller.dto.FindAllBooksResponse
 import pt.unl.fct.iadi.bookstore.controller.dto.FindBookResponse
-import pt.unl.fct.iadi.bookstore.controller.dto.FindBooksReviewsResponse
+import pt.unl.fct.iadi.bookstore.controller.dto.FindBookReviewResponse
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceReviewRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateBookRequest
@@ -43,7 +42,7 @@ interface BookstoreAPI {
         produces = ["application/json"],
         method = [RequestMethod.GET]
     )
-    fun findAllBooks() : ResponseEntity<FindAllBooksResponse>
+    fun findAllBooks() : ResponseEntity<List<FindBookResponse>>
 
 
     @Operation(
@@ -249,7 +248,7 @@ interface BookstoreAPI {
             description = "ISBN of the book to be found",
             required = true,
         ) @Valid @PathVariable("isbn") isbn: String
-    ): ResponseEntity<FindBooksReviewsResponse>
+    ): ResponseEntity<List<FindBookReviewResponse>>
 
 
     @Operation(
