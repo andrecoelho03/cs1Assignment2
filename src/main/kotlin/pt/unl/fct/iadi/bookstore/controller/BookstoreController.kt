@@ -8,49 +8,50 @@ import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceReviewRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateReviewRequest
-import pt.unl.fct.iadi.bookstore.domain.Book
-import pt.unl.fct.iadi.bookstore.domain.Review
+import pt.unl.fct.iadi.bookstore.service.BookstoreService
 
 @RestController
-class BookstoreController: BookstoreAPI {
-    override fun findAllBooks(): ResponseEntity<List<Book>> {
+class BookstoreController(
+    private val service: BookstoreService
+): BookstoreAPI {
+    override fun findAllBooks(): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
-    override fun createBook(book: CreateBookRequest): ResponseEntity<Void> {
+    override fun createBook(book: CreateBookRequest): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
-    override fun findBook(isbn: String): ResponseEntity<Book> {
+    override fun findBook(isbn: String): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
     override fun replaceBook(
         isbn: String,
         book: ReplaceBookRequest
-    ): ResponseEntity<Void> {
+    ): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
     override fun updateBook(
         isbn: String,
         book: UpdateBookRequest
-    ): ResponseEntity<Void> {
+    ): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
-    override fun deleteBook(isbn: String): ResponseEntity<Void> {
+    override fun deleteBook(isbn: String): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
-    override fun findBookReviews(isbn: String): ResponseEntity<List<Review>> {
+    override fun findBookReviews(isbn: String): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
     override fun createBookReview(
         isbn: String,
         review: CreateReviewRequest
-    ): ResponseEntity<Void> {
+    ): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
@@ -58,7 +59,7 @@ class BookstoreController: BookstoreAPI {
         isbn: String,
         id: String,
         review: ReplaceReviewRequest
-    ): ResponseEntity<Void> {
+    ): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
@@ -66,14 +67,15 @@ class BookstoreController: BookstoreAPI {
         isbn: String,
         id: String,
         review: UpdateReviewRequest
-    ): ResponseEntity<Void> {
+    ): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
 
     override fun deleteBookReview(
         isbn: String,
         id: String
-    ): ResponseEntity<Void> {
+    ): ResponseEntity<*> {
         TODO("Not yet implemented")
     }
+
 }

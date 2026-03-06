@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateReviewRequest
-import pt.unl.fct.iadi.bookstore.controller.dto.FindBookResponse
-import pt.unl.fct.iadi.bookstore.controller.dto.FindBookReviewResponse
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceReviewRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateBookRequest
@@ -42,7 +40,7 @@ interface BookstoreAPI {
         produces = ["application/json"],
         method = [RequestMethod.GET]
     )
-    fun findAllBooks() : ResponseEntity<List<FindBookResponse>>
+    fun findAllBooks() : ResponseEntity<*>
 
 
     @Operation(
@@ -79,7 +77,7 @@ interface BookstoreAPI {
             description = "Book object that needs to be added to the store",
             required = true
         ) @Valid @RequestBody book: CreateBookRequest
-    ): ResponseEntity<Void>
+    ): ResponseEntity<*>
 
 
     @Operation(
@@ -113,7 +111,7 @@ interface BookstoreAPI {
             description = "ISBN of the book to be searched",
             required = true,
         ) @Valid @PathVariable("isbn") isbn: String
-    ) : ResponseEntity<FindBookResponse>
+    ) : ResponseEntity<*>
 
 
     @Operation(
@@ -151,7 +149,7 @@ interface BookstoreAPI {
             description = "Details of the book to be replaced",
             required = true,
         ) @Valid @RequestBody book: ReplaceBookRequest
-    ): ResponseEntity<Void>
+    ): ResponseEntity<*>
 
 
     @Operation(
@@ -185,7 +183,7 @@ interface BookstoreAPI {
             description = "Details of the book to be updated",
             required = true,
         ) @Valid @RequestBody book: UpdateBookRequest
-    ): ResponseEntity<Void>
+    ): ResponseEntity<*>
 
 
     @Operation(
@@ -214,7 +212,7 @@ interface BookstoreAPI {
             description = "ISBN of the book to be deleted",
             required = true,
         ) @PathVariable("isbn") isbn: String
-    ) : ResponseEntity<Void>
+    ) : ResponseEntity<*>
 
 
     @Operation(
@@ -248,7 +246,7 @@ interface BookstoreAPI {
             description = "ISBN of the book to be found",
             required = true,
         ) @Valid @PathVariable("isbn") isbn: String
-    ): ResponseEntity<List<FindBookReviewResponse>>
+    ): ResponseEntity<*>
 
 
     @Operation(
@@ -291,7 +289,7 @@ interface BookstoreAPI {
             description = "Details of the review to be created",
             required = true,
         ) @Valid @RequestBody review: CreateReviewRequest
-    ): ResponseEntity<Void>
+    ): ResponseEntity<*>
 
 
     @Operation(
@@ -333,7 +331,7 @@ interface BookstoreAPI {
             description = "Details of the review to be replaced",
             required = true,
         ) @Valid @RequestBody review: ReplaceReviewRequest
-    ): ResponseEntity<Void>
+    ): ResponseEntity<*>
 
 
     @Operation(
@@ -371,7 +369,7 @@ interface BookstoreAPI {
             description = "Details of the review to be updated",
             required = true,
         ) @Valid @RequestBody review: UpdateReviewRequest
-    ): ResponseEntity<Void>
+    ): ResponseEntity<*>
 
 
     @Operation(
@@ -404,5 +402,5 @@ interface BookstoreAPI {
             description = "Id of the review to be deleted",
             required = true,
         ) @Valid @PathVariable("id") id: String
-    ): ResponseEntity<Void>
+    ): ResponseEntity<*>
 }
