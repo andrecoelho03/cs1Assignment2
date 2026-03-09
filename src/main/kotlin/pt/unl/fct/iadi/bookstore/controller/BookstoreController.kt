@@ -1,5 +1,7 @@
 package pt.unl.fct.iadi.bookstore.controller
 
+import jakarta.servlet.http.HttpServletRequest
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateBookRequest
@@ -15,44 +17,81 @@ class BookstoreController(
     private val service: BookstoreService
 ): BookstoreAPI {
     override fun findAllBooks(): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        val result = service.findAllBooks()
+
+        return ResponseEntity.ok(result)
     }
 
-    override fun createBook(book: CreateBookRequest): ResponseEntity<*> {
-        TODO("Not yet implemented")
+    override fun createBook(book: CreateBookRequest, req: HttpServletRequest): ResponseEntity<*> {
+        val result = service.createBook(book.toBookInput())
+
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .header("Location", "${req.requestURL}/${result}")
+            .body(mapOf("message" to "Book created successfully"))
     }
 
-    override fun findBook(isbn: String): ResponseEntity<*> {
-        TODO("Not yet implemented")
+    override fun findBook(
+        isbn: String,
+        acceptLanguage: String?
+    ): ResponseEntity<*> {
+        val result = service.findBook(isbn)
+
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .header("Content-Language", acceptLanguage ?: "en")
+            .body(result)
     }
 
     override fun replaceBook(
         isbn: String,
         book: ReplaceBookRequest
     ): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        val result = service.replaceBook(isbn, book.toBookInput())
+        // to see, can return 204 or 201 if created
+
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .body(mapOf("message" to "Book replaced successfully"))
     }
 
     override fun updateBook(
         isbn: String,
         book: UpdateBookRequest
     ): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        val result = service.updateBook(isbn, book.toBookInput())
+        // to see, can return 204 or 201 if created
+
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .body(mapOf("message" to "Book updated successfully"))
     }
 
     override fun deleteBook(isbn: String): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        service.deleteBook(isbn)
+
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .body(mapOf("message" to "Book deleted successfully"))
     }
 
     override fun findBookReviews(isbn: String): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        val result = service.findBookReviews(isbn)
+
+        return ResponseEntity.ok(result)
     }
 
     override fun createBookReview(
         isbn: String,
-        review: CreateReviewRequest
+        review: CreateReviewRequest,
+        req: HttpServletRequest
     ): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        val result = service.createBookReview(isbn, review.toReviewInput())
+
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .header("Location", "${req.requestURL}/${result}")
+            .body(mapOf("message" to "Book Review created successfully"))
     }
 
     override fun replaceBookReview(
@@ -60,7 +99,11 @@ class BookstoreController(
         id: String,
         review: ReplaceReviewRequest
     ): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        service.replaceBookReview(isbn, id.toLong(), review.toReviewInput())
+
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .body(mapOf("message" to "Book Review replaced successfully"))
     }
 
     override fun updateBookReview(
@@ -68,14 +111,22 @@ class BookstoreController(
         id: String,
         review: UpdateReviewRequest
     ): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        service.updateBookReview(isbn, id.toLong(), review.toReviewInput())
+
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .body(mapOf("message" to "Book Review updated successfully"))
     }
 
     override fun deleteBookReview(
         isbn: String,
         id: String
     ): ResponseEntity<*> {
-        TODO("Not yet implemented")
+        service.deleteBookReview(isbn, id)
+
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .body(mapOf("message" to "Book Review deleted successfully"))
     }
 
 }

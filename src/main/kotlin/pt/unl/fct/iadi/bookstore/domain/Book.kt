@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.URL
+import java.math.BigDecimal
 
 data class Book(
     @field:NotBlank
@@ -24,7 +25,7 @@ data class Book(
     @field:NotBlank
     @field:Positive
     @field:Schema(description = "Price of the book")
-    val price: Double,
+    val price: BigDecimal,
 
     @field:NotBlank
     @field:URL

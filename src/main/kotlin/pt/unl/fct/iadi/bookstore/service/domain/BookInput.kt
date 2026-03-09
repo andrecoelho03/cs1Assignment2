@@ -1,8 +1,10 @@
 package pt.unl.fct.iadi.bookstore.service.domain
 
-data class CreateBookInput(
+import java.math.BigDecimal
+
+data class BookInput(
     val title: String,
     val author: String,
-    val price: Double,
+    val price: BigDecimal,
     val image: String
 )

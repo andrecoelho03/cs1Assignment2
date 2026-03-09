@@ -7,10 +7,12 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateBookRequest
@@ -76,7 +78,8 @@ interface BookstoreAPI {
         @Parameter(
             description = "Book object that needs to be added to the store",
             required = true
-        ) @Valid @RequestBody book: CreateBookRequest
+        ) @Valid @RequestBody book: CreateBookRequest,
+        req: HttpServletRequest
     ): ResponseEntity<*>
 
 
@@ -110,7 +113,8 @@ interface BookstoreAPI {
         @Parameter(
             description = "ISBN of the book to be searched",
             required = true,
-        ) @Valid @PathVariable("isbn") isbn: String
+        ) @Valid @PathVariable("isbn") isbn: String,
+        @RequestHeader(value = "Accept-Language", required = false) acceptLanguage: String?
     ) : ResponseEntity<*>
 
 
@@ -288,7 +292,8 @@ interface BookstoreAPI {
         @Parameter(
             description = "Details of the review to be created",
             required = true,
-        ) @Valid @RequestBody review: CreateReviewRequest
+        ) @Valid @RequestBody review: CreateReviewRequest,
+        req: HttpServletRequest
     ): ResponseEntity<*>
 
 

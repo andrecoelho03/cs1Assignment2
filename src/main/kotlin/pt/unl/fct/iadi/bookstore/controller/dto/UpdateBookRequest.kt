@@ -1,10 +1,11 @@
 package pt.unl.fct.iadi.bookstore.controller.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
-import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.URL
+import pt.unl.fct.iadi.bookstore.service.domain.BookInput
+import java.math.BigDecimal
 
 data class UpdateBookRequest(
     @field:Size(min = 1, max = 120)
@@ -17,9 +18,16 @@ data class UpdateBookRequest(
 
     @field:Positive
     @field:Schema(description = "Price of the book")
-    val price: Double,
+    val price: BigDecimal,
 
     @field:URL
     @field:Schema(description = "Remote address (URL) to an image of the book cover")
     val image: String
-)
+) {
+    fun toBookInput() = BookInput(
+        title = title,
+        author = author,
+        price = price,
+        image = image
+    )
+}
