@@ -80,13 +80,13 @@ class BookstoreController(
             .body(mapOf("message" to "Book deleted successfully"))
     }
 
-    override fun findBookReviews(isbn: String): ResponseEntity<*> {
+    override fun findReviews(isbn: String): ResponseEntity<*> {
         val result = service.findBookReviews(isbn)
 
         return ResponseEntity.ok(result)
     }
 
-    override fun createBookReview(
+    override fun createReview(
         isbn: String,
         review: CreateReviewRequest,
         req: HttpServletRequest
@@ -99,7 +99,7 @@ class BookstoreController(
             .body(mapOf("message" to "Book Review created successfully"))
     }
 
-    override fun replaceBookReview(
+    override fun replaceReview(
         isbn: String,
         id: String,
         review: ReplaceReviewRequest
@@ -111,7 +111,7 @@ class BookstoreController(
             .body(mapOf("message" to "Book Review replaced successfully"))
     }
 
-    override fun updateBookReview(
+    override fun updateReview(
         isbn: String,
         id: String,
         review: UpdateReviewRequest
@@ -123,7 +123,7 @@ class BookstoreController(
             .body(mapOf("message" to "Book Review updated successfully"))
     }
 
-    override fun deleteBookReview(
+    override fun deleteReview(
         isbn: String,
         id: String
     ): ResponseEntity<*> {
