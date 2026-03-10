@@ -108,7 +108,6 @@ interface BookstoreAPI {
     @RequestMapping(
         value = ["/books/{isbn}"],
         produces = ["application/json"],
-        consumes = ["application/json"],
         method = [RequestMethod.GET]
     )
     fun findBook(
