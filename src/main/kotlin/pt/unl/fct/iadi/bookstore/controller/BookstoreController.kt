@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
+import pt.unl.fct.iadi.bookstore.controller.dto.BookResponse
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateReviewRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceBookRequest
@@ -36,7 +37,7 @@ class BookstoreController(
     override fun findBook(
         isbn: String,
         acceptLanguage: String?
-    ): ResponseEntity<*> {
+    ): ResponseEntity<BookResponse> {
         val result = service.findBook(isbn, acceptLanguage)
 
         return ResponseEntity

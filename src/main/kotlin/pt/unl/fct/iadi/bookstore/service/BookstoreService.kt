@@ -1,6 +1,7 @@
 package pt.unl.fct.iadi.bookstore.service
 
 import org.springframework.stereotype.Service
+import pt.unl.fct.iadi.bookstore.controller.dto.BookResponse
 import pt.unl.fct.iadi.bookstore.domain.Book
 import pt.unl.fct.iadi.bookstore.domain.Review
 import pt.unl.fct.iadi.bookstore.service.domain.ReviewInput
@@ -30,14 +31,16 @@ class BookstoreService {
         return book
     }
 
-    fun findBook(isbn: String, acceptLanguage: String?): Book {
+    fun findBook(isbn: String, acceptLanguage: String?): BookResponse {
         val language = acceptLanguage ?: "en"
         val errorMessage = when (language) {
             "pt" -> "Livro com ISBN $isbn não encontrado"
             else -> "Book with ISBN $isbn not found"
         }
-        return books.find { it.isbn == isbn }
+        val book = books.find { it.isbn == isbn }
             ?: throw ISBNNotFound(errorMessage)
+
+        return book.toBookResponse()
     }
 
     fun replaceBook(isbn: String, book: Book): Pair<String, Book> {

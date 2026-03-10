@@ -1,15 +1,13 @@
-package pt.unl.fct.iadi.bookstore.domain
+package pt.unl.fct.iadi.bookstore.controller.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
-import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.URL
-import pt.unl.fct.iadi.bookstore.controller.dto.BookResponse
 import java.math.BigDecimal
 
-data class Book(
+data class BookResponse(
     @field:NotBlank
     @field:Schema(description = "Identifier of the book")
     val isbn: String,
@@ -33,12 +31,4 @@ data class Book(
     @field:URL
     @field:Schema(description = "Remote address (URL) to an image of the book cover")
     val image: String
-) {
-    fun toBookResponse() = BookResponse(
-        isbn = isbn,
-        title = title,
-        author = author,
-        price = price,
-        image = image
-    )
-}
+)
