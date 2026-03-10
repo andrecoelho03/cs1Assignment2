@@ -72,6 +72,7 @@ interface BookstoreAPI {
     @RequestMapping(
         value = ["/books"],
         consumes = ["application/json"],
+        produces = ["application/json"],
         method = [RequestMethod.POST]
     )
     fun createBook(
@@ -146,6 +147,7 @@ interface BookstoreAPI {
     @RequestMapping(
         value = ["/books/{isbn}"],
         consumes = ["application/json"],
+        produces = ["application/json"],
         method = [RequestMethod.PUT]
     )
     fun replaceBook(
@@ -184,6 +186,7 @@ interface BookstoreAPI {
     @RequestMapping(
         value = ["/books/{isbn}"],
         consumes = ["application/json"],
+        produces = ["application/json"],
         method = [RequestMethod.PATCH]
     )
     fun updateBook(
@@ -217,6 +220,7 @@ interface BookstoreAPI {
     )
     @RequestMapping(
         value = ["/books/{isbn}"],
+        produces = ["application/json"],
         method = [RequestMethod.DELETE]
     )
     fun deleteBook(
@@ -290,6 +294,7 @@ interface BookstoreAPI {
     @RequestMapping(
         value = ["/books/{isbn}/reviews"],
         consumes = ["application/json"],
+        produces = ["application/json"],
         method = [RequestMethod.POST]
     )
     fun createBookReview(
@@ -329,6 +334,7 @@ interface BookstoreAPI {
     @RequestMapping(
         value = ["/books/{isbn}/reviews/{id}"],
         consumes = ["application/json"],
+        produces = ["application/json"],
         method = [RequestMethod.PUT]
     )
     fun replaceBookReview(
@@ -367,6 +373,7 @@ interface BookstoreAPI {
     @RequestMapping(
         value = ["/books/{isbn}/reviews/{id}"],
         consumes = ["application/json"],
+        produces = ["application/json"],
         method = [RequestMethod.PATCH]
     )
     fun updateBookReview(
@@ -404,6 +411,7 @@ interface BookstoreAPI {
     )
     @RequestMapping(
         value = ["/books/{isbn}/reviews/{id}"],
+        produces = ["application/json"],
         method = [RequestMethod.DELETE]
     )
     fun deleteBookReview(
