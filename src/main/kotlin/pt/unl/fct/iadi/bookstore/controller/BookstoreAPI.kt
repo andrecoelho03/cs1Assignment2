@@ -168,6 +168,10 @@ interface BookstoreAPI {
                 description = "Book updated successfully",
             ),
             ApiResponse(
+                responseCode = "400",
+                description = "ISBN mismatch"
+            ),
+            ApiResponse(
                 responseCode = "404",
                 description = "Book not found",
             )

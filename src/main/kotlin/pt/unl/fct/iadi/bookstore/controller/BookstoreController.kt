@@ -11,6 +11,7 @@ import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceReviewRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateReviewRequest
 import pt.unl.fct.iadi.bookstore.service.BookstoreService
+import java.util.UUID
 
 @RestController
 class BookstoreController(
@@ -97,7 +98,7 @@ class BookstoreController(
         id: String,
         review: ReplaceReviewRequest
     ): ResponseEntity<*> {
-        service.replaceBookReview(isbn, id.toLong(), review.toReviewInput())
+        service.replaceBookReview(isbn, id, review.toReviewInput())
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
@@ -109,7 +110,7 @@ class BookstoreController(
         id: String,
         review: UpdateReviewRequest
     ): ResponseEntity<*> {
-        service.updateBookReview(isbn, id.toLong(), review.toReviewInput())
+        service.updateBookReview(isbn, id, review.toUpdateReviewInput())
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)

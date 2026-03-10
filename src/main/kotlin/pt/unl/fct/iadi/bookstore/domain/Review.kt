@@ -3,11 +3,12 @@ package pt.unl.fct.iadi.bookstore.domain
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
+import java.util.UUID
 
 data class Review(
     @field:NotBlank
-    @field:Schema(description = "Itentifier of the review")
-    val id: String,
+    @field:Schema(description = "Identifier of the review")
+    val id: UUID,
 
     @field:NotBlank
     @field:Schema(description = "Identifier of the book")
