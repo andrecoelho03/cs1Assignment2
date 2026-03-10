@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
+import pt.unl.fct.iadi.bookstore.controller.dto.BookResponse
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.CreateReviewRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceBookRequest
@@ -116,7 +117,7 @@ interface BookstoreAPI {
             required = true,
         ) @Valid @PathVariable("isbn") isbn: String,
         @RequestHeader(value = "Accept-Language", required = false) acceptLanguage: String?
-    ) : ResponseEntity<*>
+    ) : ResponseEntity<BookResponse>
 
 
     @Operation(
