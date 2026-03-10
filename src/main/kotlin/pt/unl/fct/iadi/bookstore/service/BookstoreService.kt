@@ -40,13 +40,12 @@ class BookstoreService {
             ?: throw ISBNNotFound(errorMessage)
     }
 
-    fun replaceBook(isbn: String, book: Book): Book {
+    fun replaceBook(isbn: String, book: Book): Pair<String, Book> {
         if (isbn != book.isbn) {
             throw ISBNMismatch("ISBN in the path does not match ISBN in the body")
         }
 
         val existingBook = books.find { it.isbn == isbn }
-            ?: throw ISBNNotFound("Book with ISBN $isbn not found")
 
         val replacedBook = Book(
             isbn = isbn,
@@ -56,10 +55,14 @@ class BookstoreService {
             image = book.image
         )
 
-        books.remove(existingBook)
-        books.add(replacedBook)
-
-        return replacedBook
+        if (existingBook != null) {
+            books.remove(replacedBook)
+            books.add(replacedBook)
+            return "REPLACED" to replacedBook
+        } else {
+            books.add(replacedBook)
+            return "CREATED" to replacedBook
+        }
     }
 
     fun updateBook(isbn: String, book: UpdateBookInput): Book {

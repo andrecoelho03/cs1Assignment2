@@ -10,6 +10,7 @@ import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.ReplaceReviewRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateReviewRequest
+import pt.unl.fct.iadi.bookstore.domain.Book
 import pt.unl.fct.iadi.bookstore.service.BookstoreService
 import java.util.UUID
 
@@ -48,8 +49,16 @@ class BookstoreController(
         isbn: String,
         book: ReplaceBookRequest
     ): ResponseEntity<*> {
-        val result = service.replaceBook(isbn, book.toBook())
-        // to see, can return 204 or 201 if created
+        val result: Pair<String, Book> = service.replaceBook(isbn, book.toBook())
+        if (result.first == "CREATED") {
+            return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(mapOf("message" to "Book created successfully"))
+        } else if (result.first == "REPLACED") {
+            return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .body(mapOf("message" to "Book replaced successfully"))
+        }
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
@@ -60,7 +69,7 @@ class BookstoreController(
         isbn: String,
         book: UpdateBookRequest
     ): ResponseEntity<*> {
-        val result = service.updateBook(isbn, book.toUpdateBookInput())
+        service.updateBook(isbn, book.toUpdateBookInput())
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .body(mapOf("message" to "Book updated successfully"))
