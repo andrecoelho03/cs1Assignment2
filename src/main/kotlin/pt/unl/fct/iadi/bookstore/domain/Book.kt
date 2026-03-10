@@ -2,6 +2,7 @@ package pt.unl.fct.iadi.bookstore.domain
 
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.URL
@@ -24,6 +25,7 @@ data class Book(
 
     @field:NotBlank
     @field:Positive
+    @field:NotNull
     @field:Schema(description = "Price of the book")
     val price: BigDecimal,
 
