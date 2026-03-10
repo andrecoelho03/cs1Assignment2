@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.URL
 import pt.unl.fct.iadi.bookstore.domain.Book
-import pt.unl.fct.iadi.bookstore.service.domain.BookInput
 import java.math.BigDecimal
 
 data class CreateBookRequest(
