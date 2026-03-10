@@ -1,6 +1,7 @@
 package pt.unl.fct.iadi.bookstore.controller.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
+import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
@@ -26,6 +27,7 @@ data class ReplaceBookRequest(
 
     @field:NotBlank
     @field:Positive
+    @field:DecimalMin("0.01")
     @field:Schema(description = "Price of the book")
     val price: BigDecimal,
 
@@ -34,13 +36,6 @@ data class ReplaceBookRequest(
     @field:Schema(description = "Remote address (URL) to an image of the book cover")
     val image: String
 ) {
-    fun toBookInput() = BookInput(
-        title = title,
-        author = author,
-        price = price,
-        image = image
-    )
-
     fun toBook() = Book(
         isbn = isbn,
         title = title,
