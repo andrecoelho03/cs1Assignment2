@@ -230,7 +230,7 @@ interface BookstoreAPI {
 
     @Operation(
         summary = "See all reviews of a book",
-        operationId = "findBookReviews",
+        operationId = "findReviews",
         tags = ["review"]
     )
     @ApiResponses(
@@ -238,10 +238,6 @@ interface BookstoreAPI {
             ApiResponse(
                 responseCode = "200",
                 description = "Found all book reviews",
-            ),
-            ApiResponse(
-                responseCode = "400",
-                description = "Validation failed"
             ),
             ApiResponse(
                 responseCode = "404",
@@ -264,7 +260,7 @@ interface BookstoreAPI {
 
     @Operation(
         summary = "Create a new book review",
-        operationId = "createBookReview",
+        operationId = "createReview",
         tags = ["review"]
     )
     @ApiResponses(
@@ -360,6 +356,10 @@ interface BookstoreAPI {
             ApiResponse(
                 responseCode = "200",
                 description = "Review updated successfully",
+            ),
+            ApiResponse(
+                responseCode = "400",
+                description = "Validation failed"
             ),
             ApiResponse(
                 responseCode = "404",
