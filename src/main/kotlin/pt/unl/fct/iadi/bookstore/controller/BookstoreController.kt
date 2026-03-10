@@ -101,10 +101,10 @@ class BookstoreController(
 
     override fun replaceReview(
         isbn: String,
-        id: String,
+        reviewId: String,
         review: ReplaceReviewRequest
     ): ResponseEntity<*> {
-        service.replaceBookReview(isbn, id, review.toReviewInput())
+        service.replaceBookReview(isbn, reviewId, review.toReviewInput())
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
@@ -113,10 +113,10 @@ class BookstoreController(
 
     override fun updateReview(
         isbn: String,
-        id: String,
+        reviewId: String,
         review: UpdateReviewRequest
     ): ResponseEntity<*> {
-        service.updateBookReview(isbn, id, review.toUpdateReviewInput())
+        service.updateBookReview(isbn, reviewId, review.toUpdateReviewInput())
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
@@ -125,9 +125,9 @@ class BookstoreController(
 
     override fun deleteReview(
         isbn: String,
-        id: String
+        reviewId: String
     ): ResponseEntity<*> {
-        service.deleteBookReview(isbn, id)
+        service.deleteBookReview(isbn, reviewId)
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)

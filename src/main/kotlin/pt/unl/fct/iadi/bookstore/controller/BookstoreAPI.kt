@@ -329,7 +329,7 @@ interface BookstoreAPI {
         ]
     )
     @RequestMapping(
-        value = ["/books/{isbn}/reviews/{id}"],
+        value = ["/books/{isbn}/reviews/{reviewId}"],
         consumes = ["application/json"],
         produces = ["application/json"],
         method = [RequestMethod.PUT]
@@ -342,7 +342,7 @@ interface BookstoreAPI {
         @Parameter(
             description = "Id of the review to be replaced",
             required = true,
-        ) @Valid @PathVariable("id") id: String,
+        ) @Valid @PathVariable("reviewId") reviewId: String,
         @Parameter(
             description = "Details of the review to be replaced",
             required = true,
@@ -368,7 +368,7 @@ interface BookstoreAPI {
         ]
     )
     @RequestMapping(
-        value = ["/books/{isbn}/reviews/{id}"],
+        value = ["/books/{isbn}/reviews/{reviewId}"],
         consumes = ["application/json"],
         produces = ["application/json"],
         method = [RequestMethod.PATCH]
@@ -381,7 +381,7 @@ interface BookstoreAPI {
         @Parameter(
             description = "Id of the review to be updated",
             required = true,
-        ) @Valid @PathVariable("id") id: String,
+        ) @Valid @PathVariable("reviewId") reviewId: String,
         @Parameter(
             description = "Details of the review to be updated",
             required = true,
@@ -407,7 +407,7 @@ interface BookstoreAPI {
         ]
     )
     @RequestMapping(
-        value = ["/books/{isbn}/reviews/{id}"],
+        value = ["/books/{isbn}/reviews/{reviewId}"],
         produces = ["application/json"],
         method = [RequestMethod.DELETE]
     )
@@ -419,6 +419,6 @@ interface BookstoreAPI {
         @Parameter(
             description = "Id of the review to be deleted",
             required = true,
-        ) @Valid @PathVariable("id") id: String
+        ) @Valid @PathVariable("reviewId") reviewId: String
     ): ResponseEntity<*>
 }
