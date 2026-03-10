@@ -90,7 +90,10 @@ class BookstoreService {
         val existingBook = books.find { it.isbn == isbn }
             ?: throw ISBNNotFound("Book with ISBN $isbn not found")
 
+        val deleteReviews = reviews.filter { it.isbn == existingBook.isbn }
+
         books.remove(existingBook)
+        reviews.removeAll(deleteReviews)
     }
 
     fun findBookReviews(isbn: String): List<Review> {

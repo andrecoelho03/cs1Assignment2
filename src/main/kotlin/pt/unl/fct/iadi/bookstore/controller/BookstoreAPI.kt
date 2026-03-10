@@ -254,7 +254,7 @@ interface BookstoreAPI {
         produces = ["application/json"],
         method = [RequestMethod.GET]
     )
-    fun findBookReviews(
+    fun findReviews(
         @Parameter(
             description = "ISBN of the book to be found",
             required = true,
@@ -294,7 +294,7 @@ interface BookstoreAPI {
         produces = ["application/json"],
         method = [RequestMethod.POST]
     )
-    fun createBookReview(
+    fun createReview(
         @Parameter(
             description = "ISBN of the review to be created",
             required = true,
@@ -309,14 +309,14 @@ interface BookstoreAPI {
 
     @Operation(
         summary = "Replace a book's review",
-        operationId = "replaceBookReview",
+        operationId = "replaceReview",
         tags = ["review"]
     )
     @ApiResponses(
         value = [
             ApiResponse(
                 responseCode = "204",
-                description = "Book replaced successfully"
+                description = "Review replaced successfully"
             ),
             ApiResponse(
                 responseCode = "400",
@@ -334,7 +334,7 @@ interface BookstoreAPI {
         produces = ["application/json"],
         method = [RequestMethod.PUT]
     )
-    fun replaceBookReview(
+    fun replaceReview(
         @Parameter(
             description = "ISBN of the book to be replaced",
             required = true,
@@ -351,19 +351,19 @@ interface BookstoreAPI {
 
 
     @Operation(
-        summary = "Update a book review",
-        operationId = "updateBookReview",
+        summary = "Update a book's review",
+        operationId = "updateReview",
         tags = ["review"]
     )
     @ApiResponses(
         value = [
             ApiResponse(
                 responseCode = "204",
-                description = "Book updated successfully",
+                description = "Review updated successfully",
             ),
             ApiResponse(
                 responseCode = "404",
-                description = "Book not found",
+                description = "Review not found",
             )
         ]
     )
@@ -373,7 +373,7 @@ interface BookstoreAPI {
         produces = ["application/json"],
         method = [RequestMethod.PATCH]
     )
-    fun updateBookReview(
+    fun updateReview(
         @Parameter(
             description = "ISBN of the review to be updated",
             required = true,
@@ -391,14 +391,14 @@ interface BookstoreAPI {
 
     @Operation(
         summary = "Delete a book review",
-        operationId = "deleteBookReview",
+        operationId = "deleteReview",
         tags = ["review"]
     )
     @ApiResponses(
         value = [
             ApiResponse(
                 responseCode = "204",
-                description = "Book removed successfully",
+                description = "Review removed successfully",
             ),
             ApiResponse(
                 responseCode = "404",
@@ -411,7 +411,7 @@ interface BookstoreAPI {
         produces = ["application/json"],
         method = [RequestMethod.DELETE]
     )
-    fun deleteBookReview(
+    fun deleteReview(
         @Parameter(
             description = "ISBN of the review to be deleted",
             required = true,
