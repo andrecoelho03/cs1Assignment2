@@ -71,9 +71,7 @@ class BookstoreController(
         book: UpdateBookRequest
     ): ResponseEntity<*> {
         service.updateBook(isbn, book.toUpdateBookInput())
-        return ResponseEntity
-            .status(HttpStatus.NO_CONTENT)
-            .body(mapOf("message" to "Book updated successfully"))
+        return ResponseEntity.ok(mapOf("message" to "Book updated successfully"))
     }
 
     override fun deleteBook(isbn: String): ResponseEntity<*> {

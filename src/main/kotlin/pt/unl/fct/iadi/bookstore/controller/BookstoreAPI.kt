@@ -171,7 +171,7 @@ interface BookstoreAPI {
     @ApiResponses(
         value = [
             ApiResponse(
-                responseCode = "204",
+                responseCode = "200",
                 description = "Book updated successfully",
             ),
             ApiResponse(
