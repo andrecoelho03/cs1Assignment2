@@ -126,9 +126,13 @@ interface BookstoreAPI {
     @ApiResponses(
         value = [
             ApiResponse(
+                responseCode = "200",
+                description = "Book replaced successfully",
+            ),
+            /*ApiResponse(
                 responseCode = "201",
                 description = "Book didn't exist, created successfully",
-            ),
+            ),*/
             ApiResponse(
                 responseCode = "204",
                 description = "Book replaced successfully",
