@@ -16,7 +16,7 @@ import pt.unl.fct.iadi.bookstore.service.exception.ReviewNotFound
 class GlobalExceptionHandler {
 
     @ExceptionHandler(ISBNNotFound::class, ReviewNotFound::class)
-    fun handleNotFound(ex: RuntimeException): ResponseEntity<ErrorResponse> {
+    fun handleNotFound(ex: Exception): ResponseEntity<ErrorResponse> {
         val msg = ex.message ?: "Resource not found"
         val lang = if (msg.contains("não encontrado")) "pt" else "en"
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -32,7 +32,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ISBNMismatch::class, NoFieldsProvided::class, TooManyFieldsProvided::class)
-    fun handleBadRequest(ex: RuntimeException): ResponseEntity<ErrorResponse> {
+    fun handleBadRequest(ex: Exception): ResponseEntity<ErrorResponse> {
         val msg = ex.message ?: "Bad request"
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
             .body(ErrorResponse("BAD_REQUEST", msg))
