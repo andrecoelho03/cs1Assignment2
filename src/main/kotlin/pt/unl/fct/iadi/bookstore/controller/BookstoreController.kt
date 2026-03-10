@@ -106,9 +106,7 @@ class BookstoreController(
     ): ResponseEntity<*> {
         service.replaceBookReview(isbn, reviewId, review.toReviewInput())
 
-        return ResponseEntity
-            .status(HttpStatus.NO_CONTENT)
-            .body(mapOf("message" to "Book Review replaced successfully"))
+        return ResponseEntity.ok(mapOf("message" to "Book replaced successfully"))
     }
 
     override fun updateReview(
@@ -118,9 +116,7 @@ class BookstoreController(
     ): ResponseEntity<*> {
         service.updateBookReview(isbn, reviewId, review.toUpdateReviewInput())
 
-        return ResponseEntity
-            .status(HttpStatus.NO_CONTENT)
-            .body(mapOf("message" to "Book Review updated successfully"))
+        return ResponseEntity.ok(mapOf("message" to "Book replaced successfully"))
     }
 
     override fun deleteReview(

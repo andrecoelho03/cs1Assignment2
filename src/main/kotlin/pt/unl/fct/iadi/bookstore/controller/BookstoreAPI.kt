@@ -315,7 +315,7 @@ interface BookstoreAPI {
     @ApiResponses(
         value = [
             ApiResponse(
-                responseCode = "204",
+                responseCode = "200",
                 description = "Review replaced successfully"
             ),
             ApiResponse(
@@ -358,7 +358,7 @@ interface BookstoreAPI {
     @ApiResponses(
         value = [
             ApiResponse(
-                responseCode = "204",
+                responseCode = "200",
                 description = "Review updated successfully",
             ),
             ApiResponse(
