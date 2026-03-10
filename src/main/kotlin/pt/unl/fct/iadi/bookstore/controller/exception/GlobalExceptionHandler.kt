@@ -18,7 +18,9 @@ class GlobalExceptionHandler {
     @ExceptionHandler(ISBNNotFound::class, ReviewNotFound::class)
     fun handleNotFound(ex: ISBNNotFound): ResponseEntity<ErrorResponse> {
         val msg = ex.message ?: "Resource not found"
+        val lang = if (msg.contains("não encontrado")) "pt" else "en"
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .header("Content-Language", lang)
             .body(ErrorResponse("NOT_FOUND", msg))
     }
 
