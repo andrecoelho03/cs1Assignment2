@@ -10,6 +10,10 @@ data class Review(
     val id: String,
 
     @field:NotBlank
+    @field:Schema(description = "Identifier of the book")
+    val isbn: String,
+
+    @field:NotBlank
     @field:Size(min = 1, max = 5)
     @field:Schema(description = "Rating of the review")
     val rating: Int,

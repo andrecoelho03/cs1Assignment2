@@ -5,10 +5,15 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.URL
+import pt.unl.fct.iadi.bookstore.domain.Book
 import pt.unl.fct.iadi.bookstore.service.domain.BookInput
 import java.math.BigDecimal
 
 data class ReplaceBookRequest(
+    @field:NotBlank
+    @field:Schema(description = "Identifier of the book")
+    val isbn: String,
+
     @field:NotBlank
     @field:Size(min = 1, max = 120)
     @field:Schema(description = "Title of the book")
@@ -30,6 +35,14 @@ data class ReplaceBookRequest(
     val image: String
 ) {
     fun toBookInput() = BookInput(
+        title = title,
+        author = author,
+        price = price,
+        image = image
+    )
+
+    fun toBook() = Book(
+        isbn = isbn,
         title = title,
         author = author,
         price = price,

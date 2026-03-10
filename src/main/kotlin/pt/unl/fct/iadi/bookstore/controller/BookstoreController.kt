@@ -23,7 +23,7 @@ class BookstoreController(
     }
 
     override fun createBook(book: CreateBookRequest, req: HttpServletRequest): ResponseEntity<*> {
-        val result = service.createBook(book.toBookInput())
+        val result = service.createBook(book.toBook())
 
         return ResponseEntity
             .status(HttpStatus.CREATED)
@@ -35,7 +35,7 @@ class BookstoreController(
         isbn: String,
         acceptLanguage: String?
     ): ResponseEntity<*> {
-        val result = service.findBook(isbn)
+        val result = service.findBook(isbn, acceptLanguage)
 
         return ResponseEntity
             .status(HttpStatus.OK)
@@ -47,7 +47,7 @@ class BookstoreController(
         isbn: String,
         book: ReplaceBookRequest
     ): ResponseEntity<*> {
-        val result = service.replaceBook(isbn, book.toBookInput())
+        val result = service.replaceBook(isbn, book.toBook())
         // to see, can return 204 or 201 if created
 
         return ResponseEntity
@@ -59,9 +59,7 @@ class BookstoreController(
         isbn: String,
         book: UpdateBookRequest
     ): ResponseEntity<*> {
-        val result = service.updateBook(isbn, book.toBookInput())
-        // to see, can return 204 or 201 if created
-
+        val result = service.updateBook(isbn, book.toUpdateBookInput())
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .body(mapOf("message" to "Book updated successfully"))

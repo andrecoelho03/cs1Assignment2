@@ -5,10 +5,15 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.URL
+import pt.unl.fct.iadi.bookstore.domain.Book
 import pt.unl.fct.iadi.bookstore.service.domain.BookInput
 import java.math.BigDecimal
 
 data class CreateBookRequest(
+    @field:NotBlank
+    @field:Schema(description = "Identifier of the book")
+    val isbn: String,
+
     @field:NotBlank
     @field:Size(min = 1, max = 120)
     @field:Schema(description = "Title of the book")
@@ -29,7 +34,8 @@ data class CreateBookRequest(
     @field:Schema(description = "Remote address (URL) to an image of the book cover")
     val image: String
 ) {
-    fun toBookInput() = BookInput(
+    fun toBook() = Book(
+        isbn = isbn,
         title = title,
         author = author,
         price = price,

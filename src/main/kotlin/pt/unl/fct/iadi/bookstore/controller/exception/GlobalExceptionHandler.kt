@@ -8,14 +8,14 @@ import java.util.Locale
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
-    @ExceptionHandler(BookNotFoundException::class)
-    fun handleBookNotFound(ex: BookNotFoundException, locale: Locale):
+    @ExceptionHandler(BookException::class)
+    fun handleBookNotFound(ex: BookException, locale: Locale):
             ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse("NOT_FOUND", "Book not found"))
     }
     @ExceptionHandler(BookConflictException::class)
-    fun handleBookNotFound(ex: BookNotFoundException, locale: Locale):
+    fun handleBookNotFound(ex: BookException, locale: Locale):
             ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse("NOT_FOUND", "Book not found"))
