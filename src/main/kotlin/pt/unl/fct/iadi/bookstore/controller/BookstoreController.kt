@@ -56,9 +56,7 @@ class BookstoreController(
                 .status(HttpStatus.CREATED)
                 .body(mapOf("message" to "Book created successfully"))
         } else if (result.first == "REPLACED") {
-            return ResponseEntity
-                .status(HttpStatus.NO_CONTENT)
-                .body(mapOf("message" to "Book replaced successfully"))
+            return ResponseEntity.ok(mapOf("message" to "Book replaced successfully"))
         }
 
         return ResponseEntity

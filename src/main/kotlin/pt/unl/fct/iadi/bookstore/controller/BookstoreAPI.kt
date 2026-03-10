@@ -136,10 +136,6 @@ interface BookstoreAPI {
                 description = "Book didn't exist, created successfully",
             ),
             ApiResponse(
-                responseCode = "204",
-                description = "Book replaced successfully",
-            ),
-            ApiResponse(
                 responseCode = "400",
                 description = "Validation failed"
             )
