@@ -25,13 +25,13 @@ class BookstoreController(
         return ResponseEntity.ok(result)
     }
 
-    override fun createBook(book: CreateBookRequest, req: HttpServletRequest): ResponseEntity<*> {
+    override fun createBook(book: CreateBookRequest, req: HttpServletRequest): ResponseEntity<Unit> {
         val result = service.createBook(book.toBook())
 
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .header("Location", "${req.requestURL}/${result}")
-            .body(mapOf("message" to "Book created successfully"))
+            .build()
     }
 
     override fun findBook(
@@ -90,13 +90,13 @@ class BookstoreController(
         isbn: String,
         review: CreateReviewRequest,
         req: HttpServletRequest
-    ): ResponseEntity<*> {
+    ): ResponseEntity<Unit> {
         val result = service.createBookReview(isbn, review.toReviewInput())
 
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .header("Location", "${req.requestURL}/${result}")
-            .body(mapOf("message" to "Book Review created successfully"))
+            .build()
     }
 
     override fun replaceReview(

@@ -82,7 +82,7 @@ interface BookstoreAPI {
             required = true
         ) @Valid @RequestBody book: CreateBookRequest,
         req: HttpServletRequest
-    ): ResponseEntity<*>
+    ): ResponseEntity<Unit>
 
 
     @Operation(
@@ -300,7 +300,7 @@ interface BookstoreAPI {
             required = true,
         ) @Valid @RequestBody review: CreateReviewRequest,
         req: HttpServletRequest
-    ): ResponseEntity<*>
+    ): ResponseEntity<Unit>
 
 
     @Operation(
