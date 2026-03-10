@@ -1,13 +1,16 @@
 package pt.unl.fct.iadi.bookstore.controller.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
-import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Max
+import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import pt.unl.fct.iadi.bookstore.service.domain.ReviewInput
 
 data class ReplaceReviewRequest(
-    @field:NotBlank
-    @field:Size(min = 1, max = 5)
+    @field:NotNull
+    @field:Min(1)
+    @field:Max(5)
     @field:Schema(description = "Rating of the review")
     val rating: Int,
 
