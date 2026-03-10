@@ -13,12 +13,12 @@ import pt.unl.fct.iadi.bookstore.controller.dto.UpdateBookRequest
 import pt.unl.fct.iadi.bookstore.controller.dto.UpdateReviewRequest
 import pt.unl.fct.iadi.bookstore.domain.Book
 import pt.unl.fct.iadi.bookstore.service.BookstoreService
-import java.util.UUID
 
 @RestController
 class BookstoreController(
     private val service: BookstoreService
 ): BookstoreAPI {
+    private fun msg(text: String) = mapOf("message" to text)
     override fun findAllBooks(): ResponseEntity<*> {
         val result = service.findAllBooks()
 
@@ -54,14 +54,14 @@ class BookstoreController(
         if (result.first == "CREATED") {
             return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(mapOf("message" to "Book created successfully"))
+                .body(msg("Book created successfully"))
         } else if (result.first == "REPLACED") {
-            return ResponseEntity.ok(mapOf("message" to "Book replaced successfully"))
+            return ResponseEntity.ok(msg("Book replaced successfully"))
         }
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
-            .body(mapOf("message" to "Book replaced successfully"))
+            .body(msg("Book replaced successfully"))
     }
 
     override fun updateBook(
@@ -69,7 +69,7 @@ class BookstoreController(
         book: UpdateBookRequest
     ): ResponseEntity<*> {
         service.updateBook(isbn, book.toUpdateBookInput())
-        return ResponseEntity.ok(mapOf("message" to "Book updated successfully"))
+        return ResponseEntity.ok(msg("Book updated successfully"))
     }
 
     override fun deleteBook(isbn: String): ResponseEntity<*> {
@@ -77,7 +77,7 @@ class BookstoreController(
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
-            .body(mapOf("message" to "Book deleted successfully"))
+            .body(msg("Book deleted successfully"))
     }
 
     override fun findReviews(isbn: String): ResponseEntity<*> {
@@ -106,7 +106,7 @@ class BookstoreController(
     ): ResponseEntity<*> {
         service.replaceBookReview(isbn, reviewId, review.toReviewInput())
 
-        return ResponseEntity.ok(mapOf("message" to "Book replaced successfully"))
+        return ResponseEntity.ok(msg("Book replaced successfully"))
     }
 
     override fun updateReview(
@@ -116,7 +116,7 @@ class BookstoreController(
     ): ResponseEntity<*> {
         service.updateBookReview(isbn, reviewId, review.toUpdateReviewInput())
 
-        return ResponseEntity.ok(mapOf("message" to "Book replaced successfully"))
+        return ResponseEntity.ok(msg("Book replaced successfully"))
     }
 
     override fun deleteReview(
@@ -127,7 +127,7 @@ class BookstoreController(
 
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
-            .body(mapOf("message" to "Book Review deleted successfully"))
+            .body(msg("Book Review deleted successfully"))
     }
 
 }

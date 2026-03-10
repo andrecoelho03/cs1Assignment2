@@ -17,6 +17,9 @@ import java.util.UUID
 
 @Service
 class BookstoreService {
+    private fun isbnNotFoundMsg(isbn: String) = "Book with ISBN $isbn not found"
+    private fun reviewNotFoundMsg(isbn: String, reviewId: String) = "Review with ID $reviewId not found for book with ISBN $isbn"
+
     val books = mutableListOf<Book>()
     val reviews = mutableListOf<Review>()
 
@@ -35,7 +38,7 @@ class BookstoreService {
         val language = acceptLanguage ?: "en"
         val errorMessage = when (language) {
             "pt" -> "Livro com ISBN $isbn não encontrado"
-            else -> "Book with ISBN $isbn not found"
+            else -> isbnNotFoundMsg(isbn)
         }
         val book = books.find { it.isbn == isbn }
             ?: throw ISBNNotFound(errorMessage)
@@ -70,7 +73,7 @@ class BookstoreService {
 
     fun updateBook(isbn: String, book: UpdateBookInput): Book {
         val existingBook = books.find { it.isbn == isbn }
-            ?: throw ISBNNotFound("Book with ISBN $isbn not found")
+            ?: throw ISBNNotFound(isbnNotFoundMsg(isbn))
 
         val updatedBook = Book(
             isbn = isbn,
@@ -88,7 +91,7 @@ class BookstoreService {
 
     fun deleteBook(isbn: String) {
         val existingBook = books.find { it.isbn == isbn }
-            ?: throw ISBNNotFound("Book with ISBN $isbn not found")
+            ?: throw ISBNNotFound(isbnNotFoundMsg(isbn))
 
         val deleteReviews = reviews.filter { it.isbn == existingBook.isbn }
 
@@ -98,14 +101,14 @@ class BookstoreService {
 
     fun findBookReviews(isbn: String): List<Review> {
         books.find { it.isbn == isbn }
-            ?: throw ISBNNotFound("Book with ISBN $isbn not found")
+            ?: throw ISBNNotFound(isbnNotFoundMsg(isbn))
 
         return reviews.filter { it.isbn == isbn }
     }
 
     fun createBookReview(isbn: String, review: ReviewInput): Review {
         books.find { it.isbn == isbn }
-            ?: throw ISBNNotFound("Book with ISBN $isbn not found")
+            ?: throw ISBNNotFound(isbnNotFoundMsg(isbn))
 
         val newReview = Review(
             id = UUID.randomUUID(),
@@ -120,10 +123,10 @@ class BookstoreService {
 
     fun replaceBookReview(isbn: String, reviewId: String, review: ReviewInput): Review {
         books.find { it.isbn == isbn }
-            ?: throw ISBNNotFound("Book with ISBN $isbn not found")
+            ?: throw ISBNNotFound(isbnNotFoundMsg(isbn))
 
         val prevReview = reviews.find { it.id == UUID.fromString(reviewId) }
-            ?: throw ReviewNotFound("Review with ID $reviewId not found for book with ISBN $isbn")
+            ?: throw ReviewNotFound(reviewNotFoundMsg(isbn, reviewId))
 
         val replacedReview = Review(
             id = UUID.fromString(reviewId),
@@ -140,9 +143,9 @@ class BookstoreService {
 
     fun updateBookReview(isbn: String, reviewId: String, review: UpdateReviewInput): Review {
         books.find { it.isbn == isbn }
-            ?: throw ISBNNotFound("Book with ISBN $isbn not found")
+            ?: throw ISBNNotFound(isbnNotFoundMsg(isbn))
         val prevReview = reviews.find { it.id == UUID.fromString(reviewId) }
-            ?: throw ReviewNotFound("Review with ID $reviewId not found for book with ISBN $isbn")
+            ?: throw ReviewNotFound(reviewNotFoundMsg(isbn, reviewId))
 
         if (review.rating != null && review.comment != null) {
             throw TooManyFieldsProvided("Only one of rating or comment can be updated at a time")
@@ -179,10 +182,10 @@ class BookstoreService {
 
     fun deleteBookReview(isbn: String, reviewId: String) {
         books.find { it.isbn == isbn }
-            ?: throw ISBNNotFound("Book with ISBN $isbn not found")
+            ?: throw ISBNNotFound(isbnNotFoundMsg(isbn))
 
         val prevReview = reviews.find { it.id == UUID.fromString(reviewId) }
-            ?: throw ReviewNotFound("Review with ID $reviewId not found for book with ISBN $isbn")
+            ?: throw ReviewNotFound(reviewNotFoundMsg(isbn, reviewId))
 
         reviews.remove(prevReview)
     }
