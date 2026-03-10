@@ -1,6 +1,7 @@
 package pt.unl.fct.iadi.bookstore.domain
 
 import io.swagger.v3.oas.annotations.media.Schema
+import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
@@ -26,6 +27,7 @@ data class Book(
 
     @field:NotBlank
     @field:Positive
+    @field:DecimalMin("0.01")
     @field:Schema(description = "Price of the book")
     val price: BigDecimal,
 
